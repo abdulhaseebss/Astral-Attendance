@@ -12,7 +12,7 @@ app.use(cors())
 
 
 app.get('/' , (req , res)=>{
-    const sql = "Select * from users"
+    const sql = "SELECT * FROM `attendance_data` WHERE 1"
     db.query(sql , (err , data)=>{
         if (err) return res.json(err);
         return res.json(data)

@@ -4,9 +4,10 @@ const mysql = require("mysql");
 
  const db = mysql.createConnection({
     host: "sql6.freesqldatabase.com",
-    user: 'sql6702788@ec2-52-8-112-233.us-west-1.compute.amazonaws.com',
-    password: '',
-    database: 'sql6702788'
+    user: "sql6702788",
+    password: "DKdrfyevSz",
+    database: "sql6702788",
+    port: 3306
 })
 
 
