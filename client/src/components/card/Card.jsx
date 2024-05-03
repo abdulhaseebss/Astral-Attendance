@@ -98,7 +98,7 @@ const navigate = useNavigate()
 
   return (
     <>
-     <div className="justify-end flex items-center mt-5">
+     <div className="justify-center flex items-center mt-5">
      <div className="">
       <input
         type="text"
@@ -118,7 +118,7 @@ const navigate = useNavigate()
       <div className="flex flex-wrap justify-evenly mt-28 gap-8 ">
         {filteredData.map((item, index) => (
           <div 
-            className="px-5 flex justify-around cursor-pointer items-center w-[60%] bg-white rounded-2xl main-card py-5 "
+            className="px-10 flex justify-between cursor-pointer items-center w-[500px]  bg-white rounded-2xl main-card py-5 "
             key={item.id}
           >
             <div className="flex image1">
