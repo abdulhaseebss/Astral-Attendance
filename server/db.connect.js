@@ -8,6 +8,7 @@ const mysql = require("mysql");
     password: "DKdrfyevSz",
     database: "sql6702788",
     port: 3306
+
 })
 
 db.connect((err) => {
