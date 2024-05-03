@@ -1,10 +1,12 @@
 
-import RouterConfig from "./config/RouterConfig"
+import NewTable from "./components/newTable/NewTable"
+// import RouterConfig from "./config/RouterConfig"
 
 const App = () => {
   return (
     <div>
-      <RouterConfig/>
+      <NewTable/>
+      {/* <RouterConfig/> */}
     </div>
 
     
