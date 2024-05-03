@@ -137,13 +137,13 @@ const navigate = useNavigate()
               <p className="font-medium">faculty: {item.category}</p>
 
               <button
-                className="bg-blue-600 p-2 mt-2 text-white  rounded-xl"
+                className="bg-blue-600 px-5  py-2 mt-2 text-white  rounded-xl"
                 onClick={() => handleEntrance(index)}
               >
                 Entrance
               </button>
               <button
-                className="bg-red-600 p-2 text-white mt-2 ml-2 rounded-xl"
+                className="bg-red-600 px-8 py-2 text-white mt-2 ml-2 rounded-xl"
                 onClick={() => handleExist(index)}
               >
                 Exist
