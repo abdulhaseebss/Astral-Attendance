@@ -3,14 +3,19 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 // import SearchBar from "../dropdown/DropDown";
-// import DropDown from "../dropdown/DropDown";
+import DropDown from "../dropdown/DropDown";
 import { useNavigate } from "react-router-dom";
+import { sendData, updateDocument } from "../../config/firebase/firebaseMethod";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../../config/firebase/firebaseConfig";
+
 
 // function card
 
 const Card = () => {
   const [data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [arr , setArr] = useState([])
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
     console.log("Search term:", event.target.value);
@@ -53,10 +58,30 @@ const navigate = useNavigate()
     return truncatedWords.join(" ");
   };
 
-  // Function to handle entrance button click
-  const handleEntrance = (index) => {
 
+  // Function to handle entrance button click
+  const handleEntrance = async (index , docId) => {
+    
     const newIndex = index + 1
+    var mainData
+
+
+    await axios.get(`https://fakestoreapi.com/products/${newIndex}`)
+    .then((res)=>{
+
+      mainData = res.data
+
+      
+
+    }).catch((err)=>{
+      console.log(err);
+    })
+    
+    console.log(mainData);
+
+   
+    
+
     const currentDate = new Date();
     const options = { weekday: "long" };
     const currentDay = new Intl.DateTimeFormat("en-US", options).format(
@@ -67,6 +92,9 @@ const navigate = useNavigate()
     console.log("Current day:", currentDay);
     console.log("Current time:", currentTime);
 
+    const newTime = currentTime.split(" ")[1]
+    console.log(newTime);
+
     // sweet Alert
 
     // Swal.fire({
@@ -76,21 +104,48 @@ const navigate = useNavigate()
     //   showConfirmButton: false,
     //   timer: 1500,
     // });
+
+
+
+    const obj = {
+      name: mainData.title,
+      email: mainData.rating.count,
+      entryTime: newTime,
+      exitTime: "",
+      role: mainData.category,
+      day: currentDay
+    }
+
+    // sendData(obj , "user")
+    // .then((res)=>{
+    //   console.log(res);
+    // }).catch((err)=>{
+    //   console.log(err);
+    // })
+
+    const docRef = await addDoc(collection(db, "user"), obj);
+    console.log("Document written with ID: ", docRef.id);
+    obj.docId = docRef.id;
+    console.log(obj);
+    
   };
 
   // Function to handle exist button click
-  const handleExist = (index) => {
-    const currentDate = new Date();
-    const options = { weekday: "long" };
-    const currentDay = new Intl.DateTimeFormat("en-US", options).format(
-      currentDate
-    );
-    const currentTime = currentDate.toLocaleString();
-    console.log("Entrance clicked on card with index:", index);
-    console.log("Current day:", currentDay);
-    console.log("Current time:", currentTime);
-    // console.log("attendence:");
+  const handleExist = async (index , docId) => {
 
+    // const newIndexe = index + 1
+    // const currentDate = new Date();
+    // const options = { weekday: "long" };
+    // const currentDay = new Intl.DateTimeFormat("en-US", options).format(
+    //   currentDate
+    // );
+    // const currentTime = currentDate.toLocaleString();
+    // console.log("Entrance clicked on card with index:", newIndexe);
+    // console.log("Current day:", currentDay);
+    // console.log("Current time:", currentTime);
+    // // console.log("attendence:");
+
+    
    
   };
 
@@ -105,8 +160,10 @@ const navigate = useNavigate()
 
   return (
     <>
-     <div className="justify-end flex items-center mt-5">
+     <div className="justify-center flex items-center mt-5">
       <button className="bg-blue-600 text-lg font-semibold p-3 text-white rounded-lg mr-5 " onClick={goToAllMembers}>All Members</button>
+
+     {/* <div className="justify-center flex items-center mt-5"> */}
      <div className="">
       <input
         type="text"
@@ -119,14 +176,14 @@ const navigate = useNavigate()
 
       <div className="dropdown">
        
-      {/* <DropDown/> */}
+      <DropDown/>
       </div>
      </div>
       
       <div className="flex flex-wrap justify-evenly mt-28 gap-8 ">
         {filteredData.map((item, index) => (
           <div 
-            className="px-5 flex justify-around cursor-pointer items-center w-[60%] bg-white rounded-2xl main-card py-5 "
+            className="px-10 flex justify-between cursor-pointer items-center w-[500px]  bg-white rounded-2xl main-card py-5 "
             key={item.id}
           >
             <div className="flex image1">
@@ -146,13 +203,13 @@ const navigate = useNavigate()
 
               <button
                 className="bg-blue-600 p-2 mt-2 text-white  rounded-xl"
-                onClick={() => handleEntrance(index)}
+                onClick={() => handleEntrance(index , item.id)}
               >
                 Entrance
               </button>
               <button
                 className="bg-red-600 p-2 text-white mt-2 ml-2 rounded-xl"
-                onClick={() => handleExist(index)}
+                onClick={() => handleExist(index , item.id)}
               >
                 Exist
               </button>
