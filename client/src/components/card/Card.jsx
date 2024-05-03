@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import SearchBar from "../dropdown/DropDown";
 import DropDown from "../dropdown/DropDown";
 import { useNavigate } from "react-router-dom";
 
@@ -16,28 +15,28 @@ const Card = () => {
     console.log("Search term:", event.target.value);
   };
 
-
-// navigate function
-const navigate = useNavigate()
-  const navigateHis = (index, event) => {
-    navigate('/SingleEmp', index)
-    event.stopPropagation();
-    console.log({"message": index});
-  }
+  // navigate function
+  const navigate = useNavigate();
+  const navigateHis = () => {
+    navigate("SingleEmp");
+    // event.stopPropagation();
+  
+  };
 
   const filteredData = data.filter((item) => {
     return item.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
-  console.log("Filtered data:", filteredData);
+ 
 
   // useEstata
 
   useEffect(() => {
+
+    console.log("Filtered data:", filteredData);
     axios
       .get("https://fakestoreapi.com/products/")
       .then((res) => {
-      
         setData(res.data);
       })
       .catch((error) => {
@@ -88,48 +87,58 @@ const navigate = useNavigate()
     console.log("Current day:", currentDay);
     console.log("Current time:", currentTime);
     console.log("attendence:");
-
-   
   };
 
-  
+  const navigateAllMembers = () => {
+    navigate("/NewTable");
+  };
 
   // after the function
 
   return (
     <>
-     <div className="justify-center flex items-center mt-5">
-     <div className="">
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchTerm}
-        onChange={handleSearchChange} 
-        className="outline-none bg-gray-100 p-3 border-none active::outline-none rounded-xl w-[20vw] mr-5"
-      />
+      <div className="justify-center flex items-center mt-5">
+        <div>
+          <p
+            onClick={navigateAllMembers}
+            className="p-2 bg-blue-600 text-white rounded-lg cursor-pointer mr-5"
+          >
+            All members
+          </p>
+        </div>
+        <div className="">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="outline-none bg-gray-100 p-3 border-none active::outline-none rounded-xl w-[20vw] mr-5"
+          />
+        </div>
+
+        <div className="dropdown">
+          <DropDown />
+        </div>
       </div>
 
-      <div className="dropdown">
-       
-      <DropDown/>
-      </div>
-     </div>
-      
       <div className="flex flex-wrap justify-evenly mt-28 gap-8 ">
         {filteredData.map((item, index) => (
-          <div 
+          <div
             className="px-10 flex justify-between cursor-pointer items-center w-[500px]  bg-white rounded-2xl main-card py-5 "
             key={item.id}
           >
             <div className="flex image1">
-              <img 
+              <img
                 className="text-center mr-5 rounded-full w-44 h-44 border-[5px] border-[#55f8da]"
                 src={item.image}
                 alt=""
               />
             </div>
             <div className="image1 para leading-8 ">
-              <p onClick={()=>navigateHis(index)} className="font-semibold text-blue-700 text-2xl">
+              <p
+                onClick={() => navigateHis(item.id)}
+                className="font-semibold text-blue-700 text-2xl"
+              >
                 {truncateTitle(item.title)}
               </p>
               <p className="font-normal text-md">Today Date</p>
@@ -148,10 +157,7 @@ const navigate = useNavigate()
               >
                 Exist
               </button>
-
-              
             </div>
-          
           </div>
         ))}
       </div>

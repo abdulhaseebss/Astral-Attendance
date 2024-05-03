@@ -59,8 +59,6 @@ const NewTable = () => {
     }
 ];
 
-//   const arr = [obj];
-//   const newArr = [ "Abdul Haseeb","Graphic Design","09:05","05:06",]
 
 
   return (
