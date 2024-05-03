@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 // import SearchBar from "../dropdown/DropDown";
-import DropDown from "../dropdown/DropDown";
+// import DropDown from "../dropdown/DropDown";
 import { useNavigate } from "react-router-dom";
 
 // function card
@@ -29,15 +29,15 @@ const navigate = useNavigate()
     return item.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
-  console.log("Filtered data:", filteredData);
-
+  
   // useEstata
-
+  
   useEffect(() => {
     axios
-      .get("https://fakestoreapi.com/products/")
-      .then((res) => {
+    .get("https://fakestoreapi.com/products/")
+    .then((res) => {
       
+      // console.log("Filtered data:", res.data);
         setData(res.data);
       })
       .catch((error) => {
@@ -55,25 +55,27 @@ const navigate = useNavigate()
 
   // Function to handle entrance button click
   const handleEntrance = (index) => {
+
+    const newIndex = index + 1
     const currentDate = new Date();
     const options = { weekday: "long" };
     const currentDay = new Intl.DateTimeFormat("en-US", options).format(
       currentDate
     );
     const currentTime = currentDate.toLocaleString();
-    console.log("Entrance clicked on card with index:", index);
+    console.log("Entrance clicked on card with index:", newIndex);
     console.log("Current day:", currentDay);
     console.log("Current time:", currentTime);
 
     // sweet Alert
 
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Your attendence is done!",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    // Swal.fire({
+    //   position: "center",
+    //   icon: "success",
+    //   title: "Your attendence is done!",
+    //   showConfirmButton: false,
+    //   timer: 1500,
+    // });
   };
 
   // Function to handle exist button click
@@ -87,10 +89,15 @@ const navigate = useNavigate()
     console.log("Entrance clicked on card with index:", index);
     console.log("Current day:", currentDay);
     console.log("Current time:", currentTime);
-    console.log("attendence:");
+    // console.log("attendence:");
 
    
   };
+
+
+  function goToAllMembers() {
+    navigate("AllMembers")
+  }
 
   
 
@@ -99,6 +106,7 @@ const navigate = useNavigate()
   return (
     <>
      <div className="justify-end flex items-center mt-5">
+      <button className="bg-blue-600 text-lg font-semibold p-3 text-white rounded-lg mr-5 " onClick={goToAllMembers}>All Members</button>
      <div className="">
       <input
         type="text"
@@ -111,7 +119,7 @@ const navigate = useNavigate()
 
       <div className="dropdown">
        
-      <DropDown/>
+      {/* <DropDown/> */}
       </div>
      </div>
       
