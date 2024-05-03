@@ -5,7 +5,7 @@ import axios from "axios";
 // import SearchBar from "../dropdown/DropDown";
 import DropDown from "../dropdown/DropDown";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 // function card
 
 const Card = () => {
@@ -99,6 +99,11 @@ const navigate = useNavigate()
   return (
     <>
      <div className="justify-center flex items-center mt-5">
+     <div>
+     <Link to="/table">
+     <button>show table</button>
+     </Link>
+     </div>
      <div className="">
       <input
         type="text"

@@ -7,20 +7,8 @@ const mysql = require("mysql");
     user: "sql6702788",
     password: "DKdrfyevSz",
     database: "sql6702788",
-    port: 3306
-
+    port: 3306
 })
-
-db.connect((err) => {
-    if (err) {
-        console.log(err)
-    } else {
-        console.log("Connected to the database")
-    }
-}
-)
-
-
 
 
 // Host: sql6.freesqldatabase.com
