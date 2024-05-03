@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import Tables from "../table/Tables";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const SingleEmp = () => {
 
- const [data, setData] = useState(null); // Fixed useState syntax
+//  const [data, setData] = useState(null); // Fixed useState syntax
 
 const params =useParams()
 
