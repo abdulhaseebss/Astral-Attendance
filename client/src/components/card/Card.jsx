@@ -5,11 +5,12 @@ import axios from "axios";
 // import SearchBar from "../dropdown/DropDown";
 import DropDown from "../dropdown/DropDown";
 import { useNavigate } from "react-router-dom";
+
 import { sendData, updateDocument } from "../../config/firebase/firebaseMethod";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../config/firebase/firebaseConfig";
 
-
+import { Link } from "react-router-dom";
 // function card
 
 const Card = () => {
@@ -161,9 +162,16 @@ const navigate = useNavigate()
   return (
     <>
      <div className="justify-center flex items-center mt-5">
+
       <button className="bg-blue-600 text-lg font-semibold p-3 text-white rounded-lg mr-5 " onClick={goToAllMembers}>All Members</button>
 
      {/* <div className="justify-center flex items-center mt-5"> */}
+
+     <div>
+     <Link to="/table">
+     <button>show table</button>
+     </Link>
+     </div>
      <div className="">
       <input
         type="text"
@@ -202,14 +210,24 @@ const navigate = useNavigate()
               <p className="font-medium">faculty: {item.category}</p>
 
               <button
-                className="bg-blue-600 p-2 mt-2 text-white  rounded-xl"
+
+                // className="bg-blue-600 p-2 mt-2 text-white  rounded-xl"
                 onClick={() => handleEntrance(index , item.id)}
+
+                className="bg-blue-600 px-5  py-2 mt-2 text-white  rounded-xl"
+                // onClick={() => handleEntrance(index)}
+
               >
                 Entrance
               </button>
               <button
-                className="bg-red-600 p-2 text-white mt-2 ml-2 rounded-xl"
+
+                // className="bg-red-600 p-2 text-white mt-2 ml-2 rounded-xl"
                 onClick={() => handleExist(index , item.id)}
+
+                className="bg-red-600 px-8 py-2 text-white mt-2 ml-2 rounded-xl"
+                // onClick={() => handleExist(index)}
+
               >
                 Exist
               </button>
